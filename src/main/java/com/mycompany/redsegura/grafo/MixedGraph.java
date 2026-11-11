@@ -9,8 +9,8 @@ package com.mycompany.redsegura.grafo;
  * @author acost
  */
 
-import com.mycompany.redsegura.modelo.Vertex;
 import com.mycompany.redsegura.modelo.Edge;
+import com.mycompany.redsegura.modelo.Vertex;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,6 +19,15 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Grafo mixto: admite conexiones dirigidas (arcos) y no dirigidas (aristas),
+ * todas etiquetadas y ponderadas.
+ *
+ * <p>Los vertices se guardan en un mapa que conserva el orden de insercion
+ * (por eso las matrices usan siempre el mismo orden) y las conexiones en una
+ * lista. Los datos internos no se exponen: las colecciones devueltas son de
+ * solo lectura.</p>
+ */
 public class MixedGraph {
 
     // Almacena los vertices del grafo
@@ -27,13 +36,18 @@ public class MixedGraph {
     // Almacena las conexiones del grafo
     private final List<Edge> edges;
 
-    // Constructor
+    /** Crea un grafo vacio. */
     public MixedGraph() {
         vertices = new LinkedHashMap<>();
         edges = new ArrayList<>();
     }
 
-    // Agregar un vertice
+    /**
+     * Agrega un vertice.
+     *
+     * @param vertex vertice a agregar
+     * @throws IllegalArgumentException si es nulo o ya existe uno con su ID
+     */
     public void addVertex(Vertex vertex) {
 
         if (vertex == null) {
@@ -49,17 +63,33 @@ public class MixedGraph {
         vertices.put(vertex.getId(), vertex);
     }
 
-    // Buscar un vertice por su ID
+    /**
+     * Busca un vertice por su ID.
+     *
+     * @param id identificador del vertice
+     * @return el vertice, o null si no existe
+     */
     public Vertex getVertex(String id) {
         return vertices.get(id);
     }
 
-    // Verificar si existe un vertice
+    /**
+     * Indica si existe un vertice con ese ID.
+     *
+     * @param id identificador del vertice
+     * @return true si existe
+     */
     public boolean containsVertex(String id) {
         return vertices.containsKey(id);
     }
 
-    // Agregar una conexion
+    /**
+     * Agrega una conexion.
+     *
+     * @param edge conexion a agregar
+     * @throws IllegalArgumentException si es nula, si su ID ya existe o si
+     *         su origen o destino no estan en el grafo
+     */
     public void addEdge(Edge edge) {
 
         if (edge == null) {
@@ -88,7 +118,12 @@ public class MixedGraph {
         edges.add(edge);
     }
 
-    // Buscar una conexion por su ID
+    /**
+     * Busca una conexion por su ID.
+     *
+     * @param id identificador de la conexion
+     * @return la conexion, o null si no existe
+     */
     public Edge getEdge(String id) {
 
         for (Edge edge : edges) {
@@ -100,18 +135,34 @@ public class MixedGraph {
         return null;
     }
 
-    // Obtener todos los vertices
+    /**
+     * Devuelve todos los vertices en orden de insercion.
+     *
+     * @return coleccion de solo lectura
+     */
     public Collection<Vertex> getVertices() {
         return Collections.unmodifiableCollection(
                 vertices.values());
     }
 
-    // Obtener todas las conexiones
+    /**
+     * Devuelve todas las conexiones en orden de insercion.
+     *
+     * @return lista de solo lectura
+     */
     public List<Edge> getEdges() {
         return Collections.unmodifiableList(edges);
     }
 
-    // Obtener las conexiones que salen de un vertice
+    /**
+     * Devuelve las conexiones que se pueden recorrer saliendo de un vertice:
+     * los arcos que parten de el y las aristas que lo tocan por cualquier
+     * extremo.
+     *
+     * @param vertexId ID del vertice
+     * @return lista de conexiones transitables desde ese vertice
+     * @throws IllegalArgumentException si el vertice no existe
+     */
     public List<Edge> getOutgoingEdges(String vertexId) {
 
         if (!containsVertex(vertexId)) {
@@ -138,7 +189,14 @@ public class MixedGraph {
         return result;
     }
 
-    // Obtener los vertices vecinos
+    /**
+     * Devuelve los vertices a los que se puede llegar directamente desde un
+     * vertice, respetando la orientacion de los arcos.
+     *
+     * @param vertexId ID del vertice
+     * @return lista de vecinos
+     * @throws IllegalArgumentException si el vertice no existe
+     */
     public List<Vertex> getNeighbors(String vertexId) {
 
         List<Vertex> neighbors = new ArrayList<>();
@@ -159,24 +217,29 @@ public class MixedGraph {
         return neighbors;
     }
 
-    // Eliminar una conexion por su ID
+    /**
+     * Elimina una conexion por su ID (por ejemplo, para bloquear una via).
+     *
+     * @param edgeId ID de la conexion
+     * @return true si se elimino, false si no existia
+     */
     public boolean removeEdge(String edgeId) {
 
         return edges.removeIf(
                 edge -> edge.getId().equals(edgeId));
     }
 
-    // Cantidad de vertices
+    /** @return cantidad de vertices */
     public int getVertexCount() {
         return vertices.size();
     }
 
-    // Cantidad de conexiones
+    /** @return cantidad de conexiones */
     public int getEdgeCount() {
         return edges.size();
     }
 
-    // Mostrar informacion del grafo
+    /** Imprime cada vertice con las conexiones que salen de el. */
     public void displayGraph() {
 
         System.out.println("\n===== GRAFO REDSEGURA =====");

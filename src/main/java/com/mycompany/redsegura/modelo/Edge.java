@@ -8,17 +8,35 @@ package com.mycompany.redsegura.modelo;
  *
  * @author acost
  */
-
-
+/**
+ * Conexion ponderada entre dos vertices. Puede ser dirigida (arco, solo se
+ * recorre de origen a destino) o no dirigida (arista, se recorre en ambos
+ * sentidos). El peso representa minutos estimados de desplazamiento.
+ *
+ * <p>Es inmutable: conserva ID, etiqueta, extremos, peso y orientacion.</p>
+ */
 public class Edge {
 
-    private String id;
-    private String label;
-    private Vertex origin;
-    private Vertex destination;
-    private double weight;
-    private boolean directed;
+    private final String id;
+    private final String label;
+    private final Vertex origin;
+    private final Vertex destination;
+    private final double weight;
+    private final boolean directed;
 
+    /**
+     * Crea una conexion validando sus datos.
+     *
+     * @param id          identificador unico, por ejemplo "R01"
+     * @param label       descripcion de la conexion
+     * @param origin      vertice de origen
+     * @param destination vertice de destino
+     * @param weight      minutos de desplazamiento; debe ser positivo y finito
+     * @param directed    true si es un arco dirigido, false si es una arista
+     * @throws IllegalArgumentException si el ID o la etiqueta estan vacios,
+     *         si algun vertice es nulo, o si el peso es cero, negativo,
+     *         NaN o infinito
+     */
     public Edge(String id, String label, Vertex origin,
                 Vertex destination, double weight, boolean directed) {
 
@@ -47,30 +65,37 @@ public class Edge {
         this.directed = directed;
     }
 
+    /** @return identificador unico de la conexion */
     public String getId() {
         return id;
     }
 
+    /** @return descripcion de la conexion */
     public String getLabel() {
         return label;
     }
 
+    /** @return vertice de origen */
     public Vertex getOrigin() {
         return origin;
     }
 
+    /** @return vertice de destino */
     public Vertex getDestination() {
         return destination;
     }
 
+    /** @return peso en minutos */
     public double getWeight() {
         return weight;
     }
 
+    /** @return true si la conexion es dirigida */
     public boolean isDirected() {
         return directed;
     }
 
+    /** @return descripcion legible de la conexion */
     @Override
     public String toString() {
         String direction = directed ? "Dirigida" : "No dirigida";
@@ -83,4 +108,3 @@ public class Edge {
                 + " | Etiqueta: " + label;
     }
 }
-
