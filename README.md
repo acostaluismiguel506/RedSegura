@@ -2,7 +2,7 @@
 
 Parcial 2 de Estructura de Datos II. Aplicación de consola en **Java 17 + Maven** que modela con árboles y grafos una red de atención de emergencias en Sincelejo (universidades, salud, transporte). Los tiempos son datos didácticos de simulación, no información oficial.
 
-**Autor:** TU NOMBRE · **Docente:** Jaider Enrique Reyes Herazo · **Periodo:** 2026
+**Autor:** luis miguel acosta· **Docente:** Jaider Enrique Reyes Herazo · **Periodo:** 2026
 
 ## Cómo ejecutar
 
