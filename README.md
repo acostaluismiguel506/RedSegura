@@ -9,7 +9,7 @@ Parcial 2 de Estructura de Datos II. Aplicación de consola en **Java 17 + Maven
 Requisitos: JDK 17 o superior y Maven.
 
 ```bash
-git clone https://github.com/TU_USUARIO/RedSegura.git
+git clone https://github.com/acostaluismiguel506/RedSegura.git
 cd RedSegura
 mvn test
 mvn compile exec:java -Dexec.mainClass=com.mycompany.redsegura.aplicacion.RedSeguraApplication
