@@ -227,4 +227,19 @@ public class RedSeguraCore {
         System.out.println("===== ANALISIS DFS =====");
         new DepthFirstSearch(graph).displayAnalysis();
     }
+    
+    
+    // ---------- Arbol BFS ----------
+
+    /**
+     * Imprime el arbol BFS (nivel y padre de cada vertice) desde una raiz.
+     */
+    public void arbolBfs(String origen) {
+        System.out.println("===== ARBOL BFS =====");
+        try {
+            new BreadthFirstSearch(graph).displayTree(origen);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error controlado: " + e.getMessage());
+        }
+    }
 }

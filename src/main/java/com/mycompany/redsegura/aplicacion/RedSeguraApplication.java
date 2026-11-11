@@ -76,6 +76,14 @@ public class RedSeguraApplication {
                  case "11":
                     core.analisisDfs();
                     break;
+                 case"12":
+                    System.out.print("Vertice raiz (Enter = S02): ");
+                    String raizBfs = sc.nextLine().trim();
+                    if (raizBfs.isEmpty()) {
+                        raizBfs = "S02";
+                    }
+                    core.arbolBfs(raizBfs);
+                    break;
                 case "0":
                     salir = true;
                     System.out.println("Hasta luego.");
@@ -102,6 +110,7 @@ public class RedSeguraApplication {
         System.out.println("9. Bloquear una conexion");
         System.out.println("10. Restaurar conexiones");
         System.out.println("11. Analisis DFS: ciclos y componentes");
+        System.out.println("12. Arbol BFS (padres y niveles)");
         System.out.println("0. Salir");
         System.out.print("Elige una opcion: ");
     }
