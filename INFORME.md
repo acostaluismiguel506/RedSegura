@@ -16,6 +16,11 @@ Ver la tabla del README.
 - S02 → S08 = 24 min (S02, S01, S07, S08).
 - Bloqueando R16: S02, S01, S09, S10, S08 = 24 min. El camino cambia pero el costo empata.
 - BFS y DFS desde S02 visitan los 12 vértices en distinto orden: BFS usa cola y avanza por niveles; DFS se va por una rama hasta el fondo antes de retroceder.
+- **Árbol BFS:** además del orden de visita, BFS guarda el padre y el nivel de cada vértice y los muestra como árbol.
+- **DFS con ciclos:** se detectan ciclos ignorando la conexión por la que se llegó, para que una arista no dirigida no cuente como ciclo trivial.
+- **DFS con componentes débiles:** se cuentan ignorando la orientación de los arcos.
+- Las opciones 11 (análisis DFS) y 12 (reporte general) del menú muestran estos resultados.
+- Pruebas JUnit 5: 61 pruebas, 0 fallos.
 - Q1: Hospital Universitario se encuentra en 3 pasos en el ABB (altura 6) y en 1 paso en el AVL (altura 4).
 
 ## 4. Medición ABB vs AVL (clase BenchmarkArboles)
@@ -33,3 +38,7 @@ Al escribir las pruebas se encontró que `getPathCost` no reconocía las conexio
 
 ## 6. Limitaciones
 Los pesos son tiempos de simulación, no datos oficiales de tránsito.
+
+## 7. Documentación
+Todas las clases y métodos públicos tienen Javadoc con su complejidad. El README incluye el diagrama de clases y las instrucciones para ejecutar y probar.
+

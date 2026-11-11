@@ -27,12 +27,14 @@ La medición ABB vs AVL se ejecuta con la clase `BenchmarkArboles`.
 | 1 | Q1: buscar "Hospital Universitario" en ABB y AVL |
 | 2 | Q2: rotaciones LL, RR, LR y RL |
 | 3 | Q3: lista de adyacencia, matriz de adyacencia y de incidencia |
-| 4 | Q4: BFS y DFS desde S02 (o desde otra raíz) |
+| 4 | Q4: BFS (con árbol BFS) y DFS desde S02 (o desde otra raíz) |
 | 5 | Q5: Dijkstra S02 → S08 (24 min) |
 | 6 | Q6: bloquear R16 y recalcular |
 | 7 | Q7: vértice inexistente sin cerrar el programa |
 | 8 | Ruta personalizada |
 | 9 / 10 | Bloquear / restaurar una conexión cualquiera |
+| 11 | Análisis DFS: ciclos y componentes débiles |
+| 12 | Reporte general de la red |
 
 ## Arquitectura
 
@@ -103,3 +105,8 @@ V = vértices, E = conexiones, n = nodos del árbol, h = altura.
 ## Pruebas
 
 JUnit 5 cubre casos normales, vértices inexistentes, IDs duplicados, pesos inválidos, grafos desconectados, respeto de la orientación y las cuatro rotaciones AVL.
+
+## Documentación
+
+Todas las clases y métodos públicos tienen Javadoc, con su complejidad Big O cuando aplica.
+
