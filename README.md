@@ -98,7 +98,7 @@ V = vértices, E = conexiones, n = nodos del árbol, h = altura.
 
 - Dijkstra S02 → S08: **24 minutos** por S02, S01, S07, S08.
 - Con R16 bloqueada: la ruta cambia a S02, S01, S09, S10, S08 y el costo sigue siendo 24 (empate: 8+5+3+8 = 8+4+12).
-- Pruebas JUnit 5: **42 pruebas, 0 fallos**.
+- Pruebas JUnit 5: **61 pruebas, 0 fallos**.
 
 ## Pruebas
 
