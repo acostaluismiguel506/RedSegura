@@ -217,4 +217,14 @@ public class RedSeguraCore {
             System.out.println("Error controlado: " + e.getMessage());
         }
     }
+    
+    // ---------- Analisis DFS ----------
+
+    /**
+     * Imprime ciclos y componentes debilmente conexas del grafo.
+     */
+    public void analisisDfs() {
+        System.out.println("===== ANALISIS DFS =====");
+        new DepthFirstSearch(graph).displayAnalysis();
+    }
 }

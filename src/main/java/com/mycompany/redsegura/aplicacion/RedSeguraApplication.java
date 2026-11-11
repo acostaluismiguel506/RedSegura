@@ -73,6 +73,9 @@ public class RedSeguraApplication {
                 case "10":
                     core.restaurarConexiones();
                     break;
+                 case "11":
+                    core.analisisDfs();
+                    break;
                 case "0":
                     salir = true;
                     System.out.println("Hasta luego.");
@@ -98,6 +101,7 @@ public class RedSeguraApplication {
         System.out.println("8. Ruta personalizada");
         System.out.println("9. Bloquear una conexion");
         System.out.println("10. Restaurar conexiones");
+        System.out.println("11. Analisis DFS: ciclos y componentes");
         System.out.println("0. Salir");
         System.out.print("Elige una opcion: ");
     }
