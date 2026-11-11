@@ -8,7 +8,6 @@ package com.mycompany.redsegura.aplicacion;
  *
  * @author acost
  */
-
 import com.mycompany.redsegura.algoritmos.BreadthFirstSearch;
 import com.mycompany.redsegura.algoritmos.DepthFirstSearch;
 import com.mycompany.redsegura.algoritmos.DijkstraSolver;
@@ -30,7 +29,7 @@ public class RedSeguraCore {
     private MixedGraph graph;
     private BinarySearchTree bst;
     private AvlTree avl;
-        private Map<String, Edge> bloqueadas = new HashMap<>();
+    private Map<String, Edge> bloqueadas = new HashMap<>();
 
     public RedSeguraCore() {
         graph = RedSeguraFactory.createGraph();
@@ -118,7 +117,9 @@ public class RedSeguraCore {
      */
     public void q4BfsDfs(String origen) {
         System.out.println("===== Q4: BFS Y DFS DESDE " + origen + " =====");
-        new BreadthFirstSearch(graph).display(origen);
+        BreadthFirstSearch bfs = new BreadthFirstSearch(graph);
+        bfs.display(origen);
+        bfs.displayTree(origen);
         new DepthFirstSearch(graph).display(origen);
         System.out.println("\nPor que el orden puede diferir:");
         System.out.println("- BFS usa una COLA: visita primero todos los vecinos "
@@ -179,7 +180,7 @@ public class RedSeguraCore {
         }
         System.out.println("El programa sigue funcionando.");
     }
-    
+
     // ---------- Bloqueo manual de conexiones (para la demo) ----------
 
     /**
@@ -217,7 +218,7 @@ public class RedSeguraCore {
             System.out.println("Error controlado: " + e.getMessage());
         }
     }
-    
+
     // ---------- Analisis DFS ----------
 
     /**
@@ -227,19 +228,50 @@ public class RedSeguraCore {
         System.out.println("===== ANALISIS DFS =====");
         new DepthFirstSearch(graph).displayAnalysis();
     }
-    
-    
-    // ---------- Arbol BFS ----------
+
+    // ---------- Reporte ----------
 
     /**
-     * Imprime el arbol BFS (nivel y padre de cada vertice) desde una raiz.
+     * Imprime un reporte resumen del sistema: datos del grafo, arboles,
+     * resultado de control de Dijkstra y analisis DFS.
      */
-    public void arbolBfs(String origen) {
-        System.out.println("===== ARBOL BFS =====");
-        try {
-            new BreadthFirstSearch(graph).displayTree(origen);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error controlado: " + e.getMessage());
+    public void reporte() {
+        int dirigidas = 0;
+        int noDirigidas = 0;
+        for (Edge e : graph.getEdges()) {
+            if (e.isDirected()) {
+                dirigidas++;
+            } else {
+                noDirigidas++;
+            }
         }
+
+        System.out.println("===== REPORTE REDSEGURA =====");
+        System.out.println("Vertices: " + graph.getVertexCount());
+        System.out.println("Conexiones: " + graph.getEdgeCount()
+                + " (" + dirigidas + " dirigidas, "
+                + noDirigidas + " no dirigidas)");
+        System.out.println("ABB: " + bst.size() + " nodos, altura " + bst.height());
+        System.out.println("AVL: " + avl.size() + " nodos, altura " + avl.height()
+                + ", balance de la raiz " + avl.getRootBalance());
+
+        DijkstraSolver dijkstra = new DijkstraSolver(graph);
+        java.util.List<Vertex> ruta = dijkstra.findShortestPath("S02", "S08");
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < ruta.size(); i++) {
+            sb.append(ruta.get(i).getId());
+            if (i < ruta.size() - 1) {
+                sb.append(" -> ");
+            }
+        }
+        double costo = dijkstra.getPathCost(ruta);
+        System.out.println("Ruta de control S02 -> S08: " + sb
+                + " = " + costo + " min "
+                + (costo == 24.0 ? "[OK, coincide con el control]"
+                        : "[NO coincide con el control de 24 min]"));
+
+        DepthFirstSearch dfs = new DepthFirstSearch(graph);
+        System.out.println("Tiene ciclos: " + (dfs.hasCycle() ? "si" : "no"));
+        System.out.println("Componentes debiles: " + dfs.weakComponents().size());
     }
 }

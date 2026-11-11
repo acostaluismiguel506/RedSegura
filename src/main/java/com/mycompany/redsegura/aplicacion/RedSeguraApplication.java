@@ -9,14 +9,19 @@ package com.mycompany.redsegura.aplicacion;
  * @author acost
  */
 
-
 import java.util.Scanner;
 
 /**
- * Aplicacion de consola de RedSegura. Solo habla con RedSeguraCore.
+ * Aplicacion de consola de RedSegura. Solo habla con {@link RedSeguraCore}:
+ * no accede directamente al grafo ni a los arboles.
  */
 public class RedSeguraApplication {
 
+    /**
+     * Punto de entrada: muestra el menu hasta que el usuario elige salir.
+     *
+     * @param args no se usan
+     */
     public static void main(String[] args) {
 
         RedSeguraCore core = new RedSeguraCore();
@@ -73,16 +78,11 @@ public class RedSeguraApplication {
                 case "10":
                     core.restaurarConexiones();
                     break;
-                 case "11":
+                case "11":
                     core.analisisDfs();
                     break;
-                 case"12":
-                    System.out.print("Vertice raiz (Enter = S02): ");
-                    String raizBfs = sc.nextLine().trim();
-                    if (raizBfs.isEmpty()) {
-                        raizBfs = "S02";
-                    }
-                    core.arbolBfs(raizBfs);
+                case "12":
+                    core.reporte();
                     break;
                 case "0":
                     salir = true;
@@ -102,7 +102,7 @@ public class RedSeguraApplication {
         System.out.println("1. Q1 Buscar en ABB y AVL");
         System.out.println("2. Q2 Rotaciones AVL");
         System.out.println("3. Q3 Representaciones del grafo");
-        System.out.println("4. Q4 BFS y DFS");
+        System.out.println("4. Q4 BFS (con arbol) y DFS");
         System.out.println("5. Q5 Dijkstra S02 -> S08");
         System.out.println("6. Q6 Bloquear R16 y recalcular");
         System.out.println("7. Q7 Vertice inexistente");
@@ -110,7 +110,7 @@ public class RedSeguraApplication {
         System.out.println("9. Bloquear una conexion");
         System.out.println("10. Restaurar conexiones");
         System.out.println("11. Analisis DFS: ciclos y componentes");
-        System.out.println("12. Arbol BFS (padres y niveles)");
+        System.out.println("12. Reporte resumen del sistema");
         System.out.println("0. Salir");
         System.out.print("Elige una opcion: ");
     }
