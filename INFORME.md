@@ -1,6 +1,6 @@
 ﻿# Informe breve: RedSegura Sincelejo
 
-**Autor:** TU NOMBRE
+**Autor:** luis miguel acosta 
 
 ## 1. Decisiones de diseño
 - **MixedGraph con lista de conexiones y mapa de vértices.** Un solo grafo admite conexiones dirigidas y no dirigidas, cada una con ID, etiqueta, peso y orientación. Una conexión no dirigida se trata como bidireccional al consultar vecinos.
